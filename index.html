@@ -5,755 +5,693 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>46靓号展示站</title>
   <style>
-    :root{
-      --bg:#0b1020;
-      --bg2:#111831;
-      --card:#161f3d;
-      --card2:#1b2650;
-      --line:rgba(255,255,255,.08);
-      --text:#eef2ff;
-      --sub:#aeb8d4;
-      --blue:#7aa2ff;
-      --purple:#9b8cff;
-      --pink:#ff8ec7;
-      --green:#4ade80;
-      --orange:#fbbf24;
-      --red:#fb7185;
-      --shadow:0 10px 30px rgba(0,0,0,.25);
-      --radius:22px;
-    }
-
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      padding:0;
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(122,162,255,.18), transparent 28%),
-        radial-gradient(circle at top right, rgba(255,142,199,.14), transparent 25%),
-        linear-gradient(180deg, #0a0f1f 0%, #0f1630 100%);
-      color:var(--text);
-      font-family:"PingFang SC","Microsoft YaHei","Segoe UI",Arial,sans-serif;
+        radial-gradient(circle at top left, rgba(114, 137, 255, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(255, 135, 194, 0.12), transparent 24%),
+        linear-gradient(180deg, #060b1d 0%, #0a1026 100%);
+      color: #eef2ff;
     }
 
-    a{color:inherit;text-decoration:none}
-    button,input,select,textarea{font:inherit}
+    a { text-decoration: none; color: inherit; }
 
-    .wrap{
-      max-width:1380px;
-      margin:0 auto;
-      padding:28px 18px 50px;
-    }
-
-    .hero{
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(135deg, rgba(122,162,255,.18), rgba(155,140,255,.16) 50%, rgba(255,142,199,.14));
-      border:1px solid var(--line);
-      border-radius:30px;
-      padding:30px;
-      box-shadow:var(--shadow);
-      margin-bottom:20px;
+    .container {
+      width: min(1380px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 60px;
     }
 
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-80px;
-      top:-80px;
-      width:240px;
-      height:240px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(255,255,255,.15), transparent 68%);
-      pointer-events:none;
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(135deg, rgba(74, 98, 210, 0.28), rgba(38, 44, 105, 0.88) 55%, rgba(98, 57, 124, 0.82));
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
     }
 
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:20px;
-      flex-wrap:wrap;
+    .hero::before {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.16), transparent 68%);
+      pointer-events: none;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
     }
 
-    .logo{
-      width:58px;
-      height:58px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      font-size:26px;
-      background:linear-gradient(135deg, #7aa2ff, #9b8cff 65%, #ff8ec7);
-      box-shadow:0 8px 24px rgba(122,162,255,.35);
-      flex-shrink:0;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
-    .title h1{
-      margin:0;
-      font-size:32px;
-      font-weight:800;
-      letter-spacing:.5px;
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, #90a3ff, #8f7dff 60%, #ff96d3);
+      box-shadow: 0 14px 35px rgba(111, 132, 255, 0.35);
+      flex-shrink: 0;
     }
 
-    .title p{
-      margin:8px 0 0;
-      color:var(--sub);
-      font-size:14px;
-      line-height:1.7;
+    .hero h1 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
     }
 
-    .hero-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+    .hero p {
+      margin: 12px 0 0;
+      color: rgba(238,242,255,0.82);
+      font-size: 15px;
+      line-height: 1.8;
+      max-width: 760px;
     }
 
-    .btn{
-      border:none;
-      border-radius:14px;
-      padding:12px 16px;
-      cursor:pointer;
-      transition:.2s ease;
-      color:#fff;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.1);
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .btn:hover{transform:translateY(-1px)}
-    .btn.primary{
-      background:linear-gradient(135deg, #7aa2ff, #9b8cff);
-      border:none;
-      box-shadow:0 8px 20px rgba(122,162,255,.25);
-    }
-    .btn.pink{
-      background:linear-gradient(135deg, #ff8ec7, #9b8cff);
-      border:none;
-    }
-    .btn.green{
-      background:linear-gradient(135deg, #34d399, #22c55e);
-      border:none;
-    }
-    .btn.red{
-      background:linear-gradient(135deg, #fb7185, #ef4444);
-      border:none;
-    }
-    .btn.small{
-      padding:8px 12px;
-      font-size:13px;
-      border-radius:12px;
+    .btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 13px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      transition: 0.2s ease;
     }
 
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-top:22px;
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7a8fff, #9b7dff);
+      box-shadow: 0 12px 30px rgba(101, 115, 255, 0.28);
     }
 
-    .stat{
-      background:rgba(255,255,255,.05);
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:18px;
-      backdrop-filter: blur(6px);
+    .btn-pink {
+      background: linear-gradient(135deg, #ff9ccf, #d888ff);
+      box-shadow: 0 12px 30px rgba(255, 143, 207, 0.2);
     }
 
-    .stat .label{
-      color:var(--sub);
-      font-size:13px;
-      margin-bottom:8px;
+    .btn-ghost {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .stat .value{
-      font-size:28px;
-      font-weight:800;
+    .stats {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
     }
 
-    .layout{
-      display:grid;
-      grid-template-columns: minmax(0, 1fr) 360px;
-      gap:20px;
-      align-items:start;
+    .stat {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 18px 20px;
+      backdrop-filter: blur(8px);
     }
 
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      border-radius:26px;
-      box-shadow:var(--shadow);
+    .stat-label {
+      font-size: 13px;
+      color: rgba(238,242,255,0.68);
+      margin-bottom: 8px;
     }
 
-    .panel-head{
-      padding:18px 20px 10px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
+    .stat-value {
+      font-size: 30px;
+      font-weight: 800;
     }
 
-    .panel-head h2{
-      margin:0;
-      font-size:20px;
+    .main-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 20px;
     }
 
-    .panel-body{
-      padding:0 20px 20px;
+    .panel {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(19, 28, 62, 0.96), rgba(10, 16, 38, 0.96));
+      box-shadow: 0 18px 50px rgba(0,0,0,0.2);
     }
 
-    .toolbar{
-      display:grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
-      gap:12px;
-      margin-bottom:18px;
+    .panel-inner {
+      padding: 22px;
     }
 
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
+    .panel-title {
+      margin: 0 0 16px;
+      font-size: 26px;
+      font-weight: 800;
     }
 
-    .field label{
-      color:var(--sub);
-      font-size:13px;
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    .input, .select, .textarea{
-      width:100%;
-      border:none;
-      outline:none;
-      color:#fff;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;
-      padding:12px 14px;
+    .field label {
+      display: block;
+      font-size: 13px;
+      color: rgba(238,242,255,0.7);
+      margin-bottom: 8px;
     }
 
-    .input::placeholder,.textarea::placeholder{color:#8b94b2}
-    .textarea{min-height:80px; resize:vertical}
-
-    .recommend-box{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin-bottom:20px;
+    .input, .select {
+      width: 100%;
+      height: 48px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      padding: 0 14px;
+      outline: none;
+      font-size: 14px;
     }
 
-    .highlight{
-      background:linear-gradient(135deg, rgba(122,162,255,.15), rgba(255,142,199,.12));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:22px;
-      padding:18px;
-      position:relative;
-      overflow:hidden;
+    .input::placeholder {
+      color: rgba(238,242,255,0.38);
     }
 
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      font-size:12px;
-      color:#fff;
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:999px;
-      padding:6px 10px;
+    .section {
+      margin-top: 24px;
     }
 
-    .nice-number{
-      margin:16px 0 10px;
-      font-size:34px;
-      font-weight:900;
-      letter-spacing:2px;
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
     }
 
-    .meta{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-bottom:12px;
+    .section-title {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 800;
     }
 
-    .meta span{
-      font-size:12px;
-      color:var(--sub);
-      background:rgba(255,255,255,.06);
-      border-radius:999px;
-      padding:6px 10px;
+    .section-sub {
+      color: rgba(238,242,255,0.65);
+      font-size: 13px;
     }
 
-    .price{
-      font-size:22px;
-      font-weight:800;
-      color:#fff;
+    .hot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
 
-    .price.hide{
-      filter:blur(6px);
-      user-select:none;
+    .hot-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(122,143,255,0.15), rgba(255,140,210,0.12));
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:16px;
+    .hot-tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:22px;
-      padding:18px;
-      transition:.2s ease;
-      position:relative;
-      overflow:hidden;
+    .hot-number {
+      margin: 16px 0 12px;
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: 2px;
     }
 
-    .card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(122,162,255,.45);
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
-    .card-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-      margin-bottom:14px;
+    .chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: rgba(238,242,255,0.74);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:66px;
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
-      color:#fff;
+    .price {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
     }
 
-    .badge.sale{background:linear-gradient(135deg,#60a5fa,#818cf8)}
-    .badge.rent{background:linear-gradient(135deg,#f59e0b,#f97316)}
-    .badge.off{background:linear-gradient(135deg,#64748b,#475569)}
-
-    .fav{
-      color:#ffd166;
-      font-size:15px;
-      background:rgba(255,209,102,.12);
-      border:1px solid rgba(255,209,102,.18);
-      padding:6px 10px;
-      border-radius:999px;
+    .hide-price {
+      filter: blur(7px);
+      user-select: none;
     }
 
-    .card-number{
-      font-size:38px;
-      font-weight:900;
-      letter-spacing:2px;
-      margin:6px 0 14px;
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
-    .info-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom:14px;
+    .card {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      transition: 0.2s ease;
     }
 
-    .chip{
-      font-size:12px;
-      color:var(--sub);
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.05);
-      padding:6px 10px;
-      border-radius:999px;
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(131, 150, 255, 0.35);
     }
 
-    .remark{
-      color:#cfd7ee;
-      font-size:13px;
-      line-height:1.7;
-      min-height:22px;
-      margin-bottom:14px;
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
-    .card-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
     }
 
-    .side{
-      position:sticky;
-      top:18px;
+    .status.sale { background: linear-gradient(135deg, #61a3ff, #7a7dff); }
+    .status.rent { background: linear-gradient(135deg, #ffb347, #ff8b3d); }
+    .status.off { background: linear-gradient(135deg, #7c879c, #5d6575); }
+
+    .top-badge {
+      font-size: 12px;
+      color: #ffd978;
+      background: rgba(255, 217, 120, 0.12);
+      border: 1px solid rgba(255, 217, 120, 0.16);
+      border-radius: 999px;
+      padding: 6px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    .admin-box{
-      padding:18px;
+    .number {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
     }
 
-    .admin-box h3{
-      margin:0 0 8px;
-      font-size:20px;
+    .remark {
+      color: rgba(238,242,255,0.75);
+      font-size: 13px;
+      line-height: 1.75;
+      margin-bottom: 14px;
+      min-height: 44px;
     }
 
-    .admin-box p{
-      margin:0 0 14px;
-      color:var(--sub);
-      font-size:13px;
-      line-height:1.7;
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .admin-form{
-      display:grid;
-      gap:12px;
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .admin-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
+    .btn-small {
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .switches{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
+    .btn-copy {
+      background: linear-gradient(135deg, #7b90ff, #9c7eff);
     }
 
-    .switch{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 14px;
-      border-radius:14px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      color:#dfe7ff;
-      font-size:14px;
+    .side-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(17,24,53,0.98), rgba(9,14,33,0.98));
+      position: sticky;
+      top: 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.2);
     }
 
-    .switch input{
-      width:18px;
-      height:18px;
-      accent-color:#8b5cf6;
+    .side-title {
+      margin: 0 0 10px;
+      font-size: 24px;
+      font-weight: 800;
     }
 
-    .admin-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+    .side-desc {
+      color: rgba(238,242,255,0.72);
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 18px;
     }
 
-    .tips{
-      margin-top:14px;
-      background:rgba(122,162,255,.08);
-      border:1px solid rgba(122,162,255,.18);
-      border-radius:16px;
-      padding:12px;
-      color:#d6e1ff;
-      font-size:13px;
-      line-height:1.7;
+    .contact-box {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 14px;
     }
 
-    .empty{
-      text-align:center;
-      color:var(--sub);
-      padding:40px 20px;
-      border:1px dashed rgba(255,255,255,.12);
-      border-radius:18px;
+    .contact-label {
+      font-size: 12px;
+      color: rgba(238,242,255,0.58);
+      margin-bottom: 6px;
     }
 
-    .footer{
-      margin-top:24px;
-      text-align:center;
-      color:#98a3c7;
-      font-size:13px;
+    .contact-value {
+      font-size: 18px;
+      font-weight: 800;
+      word-break: break-all;
     }
 
-    .divider{
-      height:1px;
-      background:var(--line);
-      margin:18px 0;
+    .tips {
+      margin-top: 14px;
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(122,143,255,0.08);
+      border: 1px solid rgba(122,143,255,0.16);
+      color: rgba(232,238,255,0.88);
+      font-size: 13px;
+      line-height: 1.8;
     }
 
-    @media (max-width:1100px){
-      .layout{grid-template-columns:1fr}
-      .side{position:static}
+    .empty {
+      padding: 34px 16px;
+      text-align: center;
+      color: rgba(238,242,255,0.62);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 18px;
     }
 
-    @media (max-width:900px){
-      .stats{grid-template-columns:repeat(2,1fr)}
-      .toolbar{grid-template-columns:1fr 1fr}
-      .recommend-box{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
+    .footer {
+      margin-top: 26px;
+      text-align: center;
+      color: rgba(238,242,255,0.48);
+      font-size: 13px;
     }
 
-    @media (max-width:640px){
-      .hero{padding:20px}
-      .title h1{font-size:26px}
-      .card-number,.nice-number{font-size:30px}
-      .toolbar,.admin-grid,.switches{grid-template-columns:1fr}
-      .stats{grid-template-columns:1fr}
+    @media (max-width: 1180px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .side-card { position: static; }
+    }
+
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .toolbar { grid-template-columns: 1fr 1fr; }
+      .hot-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 34px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 20px, 1380px); }
+      .hero { padding: 22px; }
+      .toolbar, .stats { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 28px; }
+      .number, .hot-number { font-size: 34px; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
     <section class="hero">
-      <div class="topbar">
+      <div class="hero-top">
         <div class="brand">
           <div class="logo">46</div>
-          <div class="title">
+          <div>
             <h1>46靓号展示站</h1>
-            <p>支持 4位 / 6位 靓号展示、搜索筛选、价格隐藏、推荐号码与本地管理。<br>先上线展示，后续再升级真后台和数据库。</p>
+            <p>
+              精选 4位 / 6位 KOOK 靓号展示，支持搜索、分类查看、价格隐藏与一键复制。<br>
+              适合陪玩店、招人频道、个人频道、社区门面号使用。
+            </p>
           </div>
         </div>
 
-        <div class="hero-actions">
-          <button class="btn primary" id="togglePriceBtn">隐藏价格</button>
-          <button class="btn pink" id="contactBtn">联系我</button>
+        <div class="hero-btns">
+          <button class="btn btn-primary" id="togglePriceBtn">隐藏价格</button>
+          <button class="btn btn-pink" id="contactBtn">立即联系</button>
         </div>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <div class="label">当前总库存</div>
-          <div class="value" id="statTotal">0</div>
+          <div class="stat-label">当前总库存</div>
+          <div class="stat-value" id="totalCount">0</div>
         </div>
         <div class="stat">
-          <div class="label">4位号码</div>
-          <div class="value" id="stat4">0</div>
+          <div class="stat-label">4位靓号</div>
+          <div class="stat-value" id="count4">0</div>
         </div>
         <div class="stat">
-          <div class="label">6位号码</div>
-          <div class="value" id="stat6">0</div>
+          <div class="stat-label">6位靓号</div>
+          <div class="stat-value" id="count6">0</div>
         </div>
         <div class="stat">
-          <div class="label">推荐号码</div>
-          <div class="value" id="statHot">0</div>
+          <div class="stat-label">精品推荐</div>
+          <div class="stat-value" id="countHot">0</div>
         </div>
       </div>
     </section>
 
-    <div class="layout">
-      <main>
-        <section class="panel">
-          <div class="panel-head">
-            <h2>筛选与查找</h2>
+    <div class="main-grid">
+      <main class="panel">
+        <div class="panel-inner">
+          <h2 class="panel-title">搜索与筛选</h2>
+
+          <div class="toolbar">
+            <div class="field">
+              <label>搜索号码</label>
+              <input class="input" id="searchInput" placeholder="输入号码，例如 9880 / 998880" />
+            </div>
+
+            <div class="field">
+              <label>位数</label>
+              <select class="select" id="digitFilter">
+                <option value="all">全部</option>
+                <option value="4">4位</option>
+                <option value="6">6位</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>状态</label>
+              <select class="select" id="statusFilter">
+                <option value="all">全部</option>
+                <option value="sale">在售</option>
+                <option value="rent">出租中</option>
+                <option value="off">已下架</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>排序</label>
+              <select class="select" id="sortFilter">
+                <option value="default">默认排序</option>
+                <option value="priceAsc">价格从低到高</option>
+                <option value="priceDesc">价格从高到低</option>
+                <option value="numberAsc">号码从小到大</option>
+                <option value="numberDesc">号码从大到小</option>
+              </select>
+            </div>
           </div>
-          <div class="panel-body">
-            <div class="toolbar">
-              <div class="field">
-                <label>搜索号码</label>
-                <input id="searchInput" class="input" placeholder="输入号码，例如 9880 / 998880" />
-              </div>
 
-              <div class="field">
-                <label>位数</label>
-                <select id="digitFilter" class="select">
-                  <option value="all">全部</option>
-                  <option value="4">4位</option>
-                  <option value="6">6位</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label>状态</label>
-                <select id="statusFilter" class="select">
-                  <option value="all">全部</option>
-                  <option value="sale">在售</option>
-                  <option value="rent">出租中</option>
-                  <option value="off">已下架</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label>排序</label>
-                <select id="sortFilter" class="select">
-                  <option value="default">默认排序</option>
-                  <option value="priceAsc">价格从低到高</option>
-                  <option value="priceDesc">价格从高到低</option>
-                  <option value="numberAsc">号码从小到大</option>
-                  <option value="numberDesc">号码从大到小</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label>推荐</label>
-                <select id="hotFilter" class="select">
-                  <option value="all">全部</option>
-                  <option value="hot">只看推荐</option>
-                </select>
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <h3 class="section-title">精品推荐</h3>
+                <div class="section-sub">优先展示记忆点更强、卖相更好的号码</div>
               </div>
             </div>
+            <div class="hot-grid" id="hotList"></div>
+          </section>
 
-            <div class="divider"></div>
-
-            <div class="panel-head" style="padding:0 0 12px;">
-              <h2>推荐号码</h2>
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <h3 class="section-title">4位专区</h3>
+                <div class="section-sub">适合门面号、展示号、频道入口号</div>
+              </div>
             </div>
-            <div id="recommendList" class="recommend-box"></div>
+            <div class="cards" id="list4"></div>
+          </section>
 
-            <div class="divider"></div>
-
-            <div class="panel-head" style="padding:0 0 12px;">
-              <h2>全部号码</h2>
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <h3 class="section-title">6位专区</h3>
+                <div class="section-sub">预算更灵活，适合批量挑选和补货</div>
+              </div>
             </div>
-            <div id="numberList" class="grid"></div>
-          </div>
-        </section>
+            <div class="cards" id="list6"></div>
+          </section>
+        </div>
       </main>
 
-      <aside class="side">
-        <section class="panel">
-          <div class="admin-box">
-            <h3>本地管理面板</h3>
-            <p>这里是演示版后台。你在这里新增、编辑、删除后，会保存在当前浏览器本地，不用每次刷新都重来。</p>
+      <aside class="side-card">
+        <h3 class="side-title">选号说明</h3>
+        <div class="side-desc">
+          这边是 4位 / 6位靓号展示页面。<br>
+          看中直接复制号码来问，价格可隐藏，避免页面太直白。
+        </div>
 
-            <div class="admin-form">
-              <div class="field">
-                <label>号码</label>
-                <input id="formNumber" class="input" placeholder="例如 9880 / 998880" />
-              </div>
+        <div class="contact-box">
+          <div class="contact-label">联系渠道</div>
+          <div class="contact-value">微信：achi365</div>
+        </div>
 
-              <div class="admin-grid">
-                <div class="field">
-                  <label>位数</label>
-                  <select id="formDigit" class="select">
-                    <option value="4">4位</option>
-                    <option value="6">6位</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label>价格</label>
-                  <input id="formPrice" class="input" type="number" placeholder="输入价格" />
-                </div>
-              </div>
-
-              <div class="admin-grid">
-                <div class="field">
-                  <label>状态</label>
-                  <select id="formStatus" class="select">
-                    <option value="sale">在售</option>
-                    <option value="rent">出租中</option>
-                    <option value="off">已下架</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label>等级/分类</label>
-                  <input id="formLevel" class="input" placeholder="例如 精品 / 豹子 / 顺口" />
-                </div>
-              </div>
-
-              <div class="field">
-                <label>备注</label>
-                <textarea id="formRemark" class="textarea" placeholder="例如：尾号漂亮、适合展示、带重复、顺口好记"></textarea>
-              </div>
-
-              <div class="switches">
-                <label class="switch">
-                  <span>推荐号码</span>
-                  <input id="formHot" type="checkbox" />
-                </label>
-                <label class="switch">
-                  <span>显示在前台</span>
-                  <input id="formVisible" type="checkbox" checked />
-                </label>
-              </div>
-
-              <div class="admin-actions">
-                <button class="btn green" id="saveBtn">新增号码</button>
-                <button class="btn" id="resetBtn" type="button">清空表单</button>
-              </div>
-
-              <div class="tips">
-                小提示：点击卡片上的“编辑”按钮后，这里会自动带出数据。<br>
-                改完再点“保存修改”即可。
-              </div>
-            </div>
+        <div class="contact-box">
+          <div class="contact-label">适合人群</div>
+          <div class="contact-value" style="font-size:15px; font-weight:700;">
+            陪玩店 / 招人频道 / 工会社区 / 个人频道
           </div>
-        </section>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%; margin-bottom:10px;" onclick="showContact()">
+          联系我拿号
+        </button>
+        <button class="btn btn-ghost" style="width:100%;" onclick="copyContact()">
+          复制联系方式
+        </button>
+
+        <div class="tips">
+          说明：<br>
+          1. 页面展示为当前整理版；<br>
+          2. 看中号码直接发我编号；<br>
+          3. 后续还能继续升级成更完整的网站。
+        </div>
       </aside>
     </div>
 
     <div class="footer">
-      46靓号展示站 · 静态演示版 · 适合先上线展示，后续可升级真后台
+      46靓号展示站 · GitHub Pages 静态版
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "cool-number-site-data-v1";
-    const PRICE_TOGGLE_KEY = "cool-number-price-toggle-v1";
+    const CONTACT_TEXT = "微信：achi365";
+    let showPrice = true;
 
-    const defaultData = [
-      { id: 1, number: "9880", digit: 4, price: 1000, status: "sale", level: "精品", hot: true, visible: true, remark: "尾号顺口，适合展示" },
-      { id: 2, number: "6880", digit: 4, price: 600, status: "sale", level: "顺口", hot: false, visible: true, remark: "数字舒服，简洁耐看" },
-      { id: 3, number: "0299", digit: 4, price: 600, status: "sale", level: "个性", hot: false, visible: true, remark: "带双9，辨识度高" },
-      { id: 4, number: "1660", digit: 4, price: 600, status: "rent", level: "顺口", hot: false, visible: true, remark: "当前出租中，可咨询" },
-      { id: 5, number: "998880", digit: 6, price: 500, status: "sale", level: "豹子感", hot: true, visible: true, remark: "重复感强，记忆点明显" },
-      { id: 6, number: "988889", digit: 6, price: 500, status: "sale", level: "精品", hot: true, visible: true, remark: "尾部重复，适合门面号" },
-      { id: 7, number: "223300", digit: 6, price: 300, status: "sale", level: "双对", hot: false, visible: true, remark: "简洁有节奏感" },
-      { id: 8, number: "111100", digit: 6, price: 500, status: "off", level: "豹子感", hot: false, visible: true, remark: "当前已下架，暂不展示交易" },
-      { id: 9, number: "889990", digit: 6, price: 300, status: "sale", level: "精品", hot: false, visible: true, remark: "尾部规整，好记" }
+    const premium4 = new Set(["2882", "9880", "6777", "5050", "6880"]);
+
+    const top6 = new Set([
+      "999909", "228822", "221122", "088088", "100001", "088880",
+      "998800", "880008", "998880", "998887", "988880", "988889",
+      "667788", "001111", "333300", "111100", "886699"
+    ]);
+
+    const mid6 = new Set([
+      "119911", "999444", "022022", "077077", "022220", "212212",
+      "600066", "010010", "011011", "001199", "000033", "889990", "444400"
+    ]);
+
+    const low6 = new Set([
+      "996600", "556600"
+    ]);
+
+    const numbers = [
+      ...[
+        "0299", "2882", "9880", "6990", "6777", "7070", "1880", "1990",
+        "0089", "1660", "5050", "0050", "0060", "2223", "5556", "6880"
+      ].map(n => ({
+        number: n,
+        digit: 4,
+        price: premium4.has(n) ? 1000 : 600,
+        status: "sale",
+        hot: premium4.has(n),
+        level: premium4.has(n) ? "精品" : "4位",
+        remark: "当前在库"
+      })),
+
+      ...[
+        "999909", "228822", "221122", "088088", "119911", "100001", "088880", "998800", "880008", "999444",
+        "998880", "998887", "988880", "988889",
+        "022022", "077077", "022220", "212212", "789000", "667788", "996600", "556600", "112200", "678900",
+        "001111", "600066", "333300", "010010", "011011", "223300", "000090",
+        "444400", "111100", "001199", "000033", "889990", "886699"
+      ].map(n => ({
+        number: n,
+        digit: 6,
+        price: top6.has(n) ? 500 : mid6.has(n) ? 300 : low6.has(n) ? 200 : 150,
+        status: "sale",
+        hot: top6.has(n),
+        level: top6.has(n) ? "精品" : "6位",
+        remark: "当前在库"
+      }))
     ];
-
-    let numbers = loadData();
-    let showPrice = loadPriceToggle();
-    let editingId = null;
 
     const searchInput = document.getElementById("searchInput");
     const digitFilter = document.getElementById("digitFilter");
     const statusFilter = document.getElementById("statusFilter");
     const sortFilter = document.getElementById("sortFilter");
-    const hotFilter = document.getElementById("hotFilter");
-    const numberList = document.getElementById("numberList");
-    const recommendList = document.getElementById("recommendList");
+    const hotList = document.getElementById("hotList");
+    const list4 = document.getElementById("list4");
+    const list6 = document.getElementById("list6");
     const togglePriceBtn = document.getElementById("togglePriceBtn");
-    const contactBtn = document.getElementById("contactBtn");
-
-    const formNumber = document.getElementById("formNumber");
-    const formDigit = document.getElementById("formDigit");
-    const formPrice = document.getElementById("formPrice");
-    const formStatus = document.getElementById("formStatus");
-    const formLevel = document.getElementById("formLevel");
-    const formRemark = document.getElementById("formRemark");
-    const formHot = document.getElementById("formHot");
-    const formVisible = document.getElementById("formVisible");
-    const saveBtn = document.getElementById("saveBtn");
-    const resetBtn = document.getElementById("resetBtn");
-
-    function loadData() {
-      try {
-        const local = localStorage.getItem(STORAGE_KEY);
-        return local ? JSON.parse(local) : defaultData;
-      } catch {
-        return defaultData;
-      }
-    }
-
-    function saveData() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(numbers));
-    }
-
-    function loadPriceToggle() {
-      const local = localStorage.getItem(PRICE_TOGGLE_KEY);
-      return local === null ? true : JSON.parse(local);
-    }
-
-    function savePriceToggle() {
-      localStorage.setItem(PRICE_TOGGLE_KEY, JSON.stringify(showPrice));
-    }
 
     function getStatusText(status) {
       if (status === "sale") return "在售";
@@ -761,241 +699,147 @@
       return "已下架";
     }
 
-    function getStatusClass(status) {
-      if (status === "sale") return "sale";
-      if (status === "rent") return "rent";
-      return "off";
+    function getCard(item) {
+      return `
+        <div class="card">
+          <div class="card-top">
+            <span class="status ${item.status}">${getStatusText(item.status)}</span>
+            ${item.hot ? `<span class="top-badge">★ 精品</span>` : ``}
+          </div>
+
+          <div class="number">${item.number}</div>
+
+          <div class="chips">
+            <span class="chip">${item.digit}位</span>
+            <span class="chip">${item.level}</span>
+          </div>
+
+          <div class="remark">${item.remark}</div>
+
+          <div class="card-bottom">
+            <div class="price ${showPrice ? "" : "hide-price"}">
+              ${showPrice ? "¥ " + item.price : "¥ ******"}
+            </div>
+
+            <div class="actions">
+              <button class="btn-small btn-copy" onclick="copyNumber('${item.number}')">复制号码</button>
+              <button class="btn-small" onclick="showContact()">联系我</button>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
-    function renderStats() {
-      const visibleNumbers = numbers.filter(item => item.visible);
-      document.getElementById("statTotal").textContent = visibleNumbers.length;
-      document.getElementById("stat4").textContent = visibleNumbers.filter(item => item.digit === 4).length;
-      document.getElementById("stat6").textContent = visibleNumbers.filter(item => item.digit === 6).length;
-      document.getElementById("statHot").textContent = visibleNumbers.filter(item => item.hot).length;
+    function renderStats(data) {
+      document.getElementById("totalCount").textContent = data.length;
+      document.getElementById("count4").textContent = data.filter(i => i.digit === 4).length;
+      document.getElementById("count6").textContent = data.filter(i => i.digit === 6).length;
+      document.getElementById("countHot").textContent = data.filter(i => i.hot).length;
     }
 
     function getFilteredData() {
-      let data = numbers.filter(item => item.visible);
+      let data = [...numbers];
 
       const keyword = searchInput.value.trim();
       const digit = digitFilter.value;
       const status = statusFilter.value;
       const sort = sortFilter.value;
-      const hot = hotFilter.value;
 
       if (keyword) {
-        data = data.filter(item => item.number.includes(keyword) || (item.level || "").includes(keyword) || (item.remark || "").includes(keyword));
+        data = data.filter(i =>
+          i.number.includes(keyword) ||
+          i.level.includes(keyword) ||
+          i.remark.includes(keyword)
+        );
       }
 
       if (digit !== "all") {
-        data = data.filter(item => String(item.digit) === digit);
+        data = data.filter(i => String(i.digit) === digit);
       }
 
       if (status !== "all") {
-        data = data.filter(item => item.status === status);
+        data = data.filter(i => i.status === status);
       }
 
-      if (hot === "hot") {
-        data = data.filter(item => item.hot);
-      }
-
-      if (sort === "priceAsc") data.sort((a,b) => a.price - b.price);
-      if (sort === "priceDesc") data.sort((a,b) => b.price - a.price);
-      if (sort === "numberAsc") data.sort((a,b) => Number(a.number) - Number(b.number));
-      if (sort === "numberDesc") data.sort((a,b) => Number(b.number) - Number(a.number));
+      if (sort === "priceAsc") data.sort((a, b) => a.price - b.price);
+      if (sort === "priceDesc") data.sort((a, b) => b.price - a.price);
+      if (sort === "numberAsc") data.sort((a, b) => Number(a.number) - Number(b.number));
+      if (sort === "numberDesc") data.sort((a, b) => Number(b.number) - Number(a.number));
 
       return data;
     }
 
-    function renderRecommend() {
-      const hotData = numbers.filter(item => item.visible && item.hot).slice(0, 3);
-
-      if (!hotData.length) {
-        recommendList.innerHTML = '<div class="empty" style="grid-column:1/-1;">暂时没有推荐号码</div>';
-        return;
-      }
-
-      recommendList.innerHTML = hotData.map(item => `
-        <div class="highlight">
-          <span class="tag">⭐ 推荐号码</span>
-          <div class="nice-number">${item.number}</div>
-          <div class="meta">
-            <span>${item.digit}位</span>
-            <span>${item.level || "未分类"}</span>
-            <span>${getStatusText(item.status)}</span>
-          </div>
-          <div class="price ${showPrice ? "" : "hide"}">${showPrice ? "¥ " + item.price : "¥ ******"}</div>
-        </div>
-      `).join("");
-    }
-
-    function renderList() {
+    function render() {
       const data = getFilteredData();
 
-      if (!data.length) {
-        numberList.innerHTML = `<div class="empty" style="grid-column:1/-1;">没有找到符合条件的号码</div>`;
-        return;
-      }
+      renderStats(data);
 
-      numberList.innerHTML = data.map(item => `
-        <div class="card">
-          <div class="card-top">
-            <span class="badge ${getStatusClass(item.status)}">${getStatusText(item.status)}</span>
-            ${item.hot ? `<span class="fav">★ 推荐</span>` : ``}
+      const hotData = data.filter(i => i.hot).slice(0, 3);
+      const data4 = data.filter(i => i.digit === 4);
+      const data6 = data.filter(i => i.digit === 6);
+
+      hotList.innerHTML = hotData.length
+        ? hotData.map(item => `
+          <div class="hot-card">
+            <span class="hot-tag">精品推荐</span>
+            <div class="hot-number">${item.number}</div>
+            <div class="chips">
+              <span class="chip">${item.digit}位</span>
+              <span class="chip">${item.level}</span>
+              <span class="chip">${getStatusText(item.status)}</span>
+            </div>
+            <div class="price ${showPrice ? "" : "hide-price"}">
+              ${showPrice ? "¥ " + item.price : "¥ ******"}
+            </div>
           </div>
+        `).join("")
+        : `<div class="empty" style="grid-column:1/-1;">没有符合条件的精品号码</div>`;
 
-          <div class="card-number">${item.number}</div>
+      list4.innerHTML = data4.length
+        ? data4.map(getCard).join("")
+        : `<div class="empty" style="grid-column:1/-1;">没有符合条件的 4位号码</div>`;
 
-          <div class="info-row">
-            <span class="chip">${item.digit}位</span>
-            <span class="chip">${item.level || "未分类"}</span>
-            <span class="chip ${showPrice ? "" : "hide"}">${showPrice ? "¥ " + item.price : "¥ ******"}</span>
-          </div>
-
-          <div class="remark">${item.remark || "暂无备注"}</div>
-
-          <div class="card-actions">
-            <button class="btn small primary" onclick="copyNumber('${item.number}')">复制号码</button>
-            <button class="btn small" onclick="editItem(${item.id})">编辑</button>
-            <button class="btn small red" onclick="deleteItem(${item.id})">删除</button>
-          </div>
-        </div>
-      `).join("");
+      list6.innerHTML = data6.length
+        ? data6.map(getCard).join("")
+        : `<div class="empty" style="grid-column:1/-1;">没有符合条件的 6位号码</div>`;
     }
 
-    function renderAll() {
-      togglePriceBtn.textContent = showPrice ? "隐藏价格" : "显示价格";
-      renderStats();
-      renderRecommend();
-      renderList();
-    }
-
-    function resetForm() {
-      editingId = null;
-      formNumber.value = "";
-      formDigit.value = "4";
-      formPrice.value = "";
-      formStatus.value = "sale";
-      formLevel.value = "";
-      formRemark.value = "";
-      formHot.checked = false;
-      formVisible.checked = true;
-      saveBtn.textContent = "新增号码";
-    }
-
-    function validateForm() {
-      const number = formNumber.value.trim();
-      const digit = Number(formDigit.value);
-      const price = Number(formPrice.value);
-
-      if (!number) {
-        alert("请输入号码");
-        return false;
-      }
-
-      if (!/^\d+$/.test(number)) {
-        alert("号码只能输入数字");
-        return false;
-      }
-
-      if (number.length !== digit) {
-        alert(`你选择的是 ${digit} 位，但号码长度不对`);
-        return false;
-      }
-
-      if (!price || price < 0) {
-        alert("请输入正确价格");
-        return false;
-      }
-
-      return true;
-    }
-
-    function submitForm() {
-      if (!validateForm()) return;
-
-      const payload = {
-        number: formNumber.value.trim(),
-        digit: Number(formDigit.value),
-        price: Number(formPrice.value),
-        status: formStatus.value,
-        level: formLevel.value.trim(),
-        hot: formHot.checked,
-        visible: formVisible.checked,
-        remark: formRemark.value.trim()
-      };
-
-      if (editingId) {
-        numbers = numbers.map(item => item.id === editingId ? { ...item, ...payload } : item);
-      } else {
-        numbers.unshift({
-          id: Date.now(),
-          ...payload
-        });
-      }
-
-      saveData();
-      resetForm();
-      renderAll();
-    }
-
-    window.editItem = function(id) {
-      const item = numbers.find(n => n.id === id);
-      if (!item) return;
-
-      editingId = id;
-      formNumber.value = item.number;
-      formDigit.value = String(item.digit);
-      formPrice.value = item.price;
-      formStatus.value = item.status;
-      formLevel.value = item.level || "";
-      formRemark.value = item.remark || "";
-      formHot.checked = item.hot;
-      formVisible.checked = item.visible;
-      saveBtn.textContent = "保存修改";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    window.deleteItem = function(id) {
-      const item = numbers.find(n => n.id === id);
-      if (!item) return;
-      if (!confirm(`确定删除号码 ${item.number} 吗？`)) return;
-
-      numbers = numbers.filter(n => n.id !== id);
-      saveData();
-      if (editingId === id) resetForm();
-      renderAll();
-    }
-
-    window.copyNumber = async function(number) {
+    async function copyNumber(number) {
       try {
         await navigator.clipboard.writeText(number);
         alert("号码已复制：" + number);
-      } catch {
+      } catch (e) {
         alert("复制失败，请手动复制：" + number);
       }
     }
 
-    [searchInput, digitFilter, statusFilter, sortFilter, hotFilter].forEach(el => {
-      el.addEventListener("input", renderList);
-      el.addEventListener("change", renderList);
-    });
+    async function copyContact() {
+      try {
+        await navigator.clipboard.writeText(CONTACT_TEXT);
+        alert("联系方式已复制：" + CONTACT_TEXT);
+      } catch (e) {
+        alert(CONTACT_TEXT);
+      }
+    }
 
-    togglePriceBtn.addEventListener("click", () => {
+    function showContact() {
+      alert("联系我拿号\n" + CONTACT_TEXT);
+    }
+
+    togglePriceBtn.addEventListener("click", function () {
       showPrice = !showPrice;
-      savePriceToggle();
-      renderAll();
+      togglePriceBtn.textContent = showPrice ? "隐藏价格" : "显示价格";
+      render();
     });
 
-    contactBtn.addEventListener("click", () => {
-      alert("把这里改成你的联系方式，例如：微信 / TG / QQ");
+    document.getElementById("contactBtn").addEventListener("click", showContact);
+
+    [searchInput, digitFilter, statusFilter, sortFilter].forEach(el => {
+      el.addEventListener("input", render);
+      el.addEventListener("change", render);
     });
 
-    saveBtn.addEventListener("click", submitForm);
-    resetBtn.addEventListener("click", resetForm);
-
-    renderAll();
+    render();
   </script>
 </body>
 </html>
