@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>46靓号展示站</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg2:#111831;
+      --card:#161f3d;
+      --card2:#1b2650;
+      --line:rgba(255,255,255,.08);
+      --text:#eef2ff;
+      --sub:#aeb8d4;
+      --blue:#7aa2ff;
+      --purple:#9b8cff;
+      --pink:#ff8ec7;
+      --green:#4ade80;
+      --orange:#fbbf24;
+      --red:#fb7185;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(circle at top left, rgba(122,162,255,.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,142,199,.14), transparent 25%),
+        linear-gradient(180deg, #0a0f1f 0%, #0f1630 100%);
+      color:var(--text);
+      font-family:"PingFang SC","Microsoft YaHei","Segoe UI",Arial,sans-serif;
+    }
+
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+
+    .wrap{
+      max-width:1380px;
+      margin:0 auto;
+      padding:28px 18px 50px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(135deg, rgba(122,162,255,.18), rgba(155,140,255,.16) 50%, rgba(255,142,199,.14));
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:30px;
+      box-shadow:var(--shadow);
+      margin-bottom:20px;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-80px;
+      top:-80px;
+      width:240px;
+      height:240px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.15), transparent 68%);
+      pointer-events:none;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo{
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      font-size:26px;
+      background:linear-gradient(135deg, #7aa2ff, #9b8cff 65%, #ff8ec7);
+      box-shadow:0 8px 24px rgba(122,162,255,.35);
+      flex-shrink:0;
+    }
+
+    .title h1{
+      margin:0;
+      font-size:32px;
+      font-weight:800;
+      letter-spacing:.5px;
+    }
+
+    .title p{
+      margin:8px 0 0;
+      color:var(--sub);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border:none;
+      border-radius:14px;
+      padding:12px 16px;
+      cursor:pointer;
+      transition:.2s ease;
+      color:#fff;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.1);
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      background:linear-gradient(135deg, #7aa2ff, #9b8cff);
+      border:none;
+      box-shadow:0 8px 20px rgba(122,162,255,.25);
+    }
+    .btn.pink{
+      background:linear-gradient(135deg, #ff8ec7, #9b8cff);
+      border:none;
+    }
+    .btn.green{
+      background:linear-gradient(135deg, #34d399, #22c55e);
+      border:none;
+    }
+    .btn.red{
+      background:linear-gradient(135deg, #fb7185, #ef4444);
+      border:none;
+    }
+    .btn.small{
+      padding:8px 12px;
+      font-size:13px;
+      border-radius:12px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+      backdrop-filter: blur(6px);
+    }
+
+    .stat .label{
+      color:var(--sub);
+      font-size:13px;
+      margin-bottom:8px;
+    }
+
+    .stat .value{
+      font-size:28px;
+      font-weight:800;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+    }
+
+    .panel-head{
+      padding:18px 20px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .panel-head h2{
+      margin:0;
+      font-size:20px;
+    }
+
+    .panel-body{
+      padding:0 20px 20px;
+    }
+
+    .toolbar{
+      display:grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field label{
+      color:var(--sub);
+      font-size:13px;
+    }
+
+    .input, .select, .textarea{
+      width:100%;
+      border:none;
+      outline:none;
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:12px 14px;
+    }
+
+    .input::placeholder,.textarea::placeholder{color:#8b94b2}
+    .textarea{min-height:80px; resize:vertical}
+
+    .recommend-box{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .highlight{
+      background:linear-gradient(135deg, rgba(122,162,255,.15), rgba(255,142,199,.12));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:12px;
+      color:#fff;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:999px;
+      padding:6px 10px;
+    }
+
+    .nice-number{
+      margin:16px 0 10px;
+      font-size:34px;
+      font-weight:900;
+      letter-spacing:2px;
+    }
+
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .meta span{
+      font-size:12px;
+      color:var(--sub);
+      background:rgba(255,255,255,.06);
+      border-radius:999px;
+      padding:6px 10px;
+    }
+
+    .price{
+      font-size:22px;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .price.hide{
+      filter:blur(6px);
+      user-select:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      padding:18px;
+      transition:.2s ease;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(122,162,255,.45);
+    }
+
+    .card-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:66px;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      color:#fff;
+    }
+
+    .badge.sale{background:linear-gradient(135deg,#60a5fa,#818cf8)}
+    .badge.rent{background:linear-gradient(135deg,#f59e0b,#f97316)}
+    .badge.off{background:linear-gradient(135deg,#64748b,#475569)}
+
+    .fav{
+      color:#ffd166;
+      font-size:15px;
+      background:rgba(255,209,102,.12);
+      border:1px solid rgba(255,209,102,.18);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    .card-number{
+      font-size:38px;
+      font-weight:900;
+      letter-spacing:2px;
+      margin:6px 0 14px;
+    }
+
+    .info-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .chip{
+      font-size:12px;
+      color:var(--sub);
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.05);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    .remark{
+      color:#cfd7ee;
+      font-size:13px;
+      line-height:1.7;
+      min-height:22px;
+      margin-bottom:14px;
+    }
+
+    .card-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .side{
+      position:sticky;
+      top:18px;
+    }
+
+    .admin-box{
+      padding:18px;
+    }
+
+    .admin-box h3{
+      margin:0 0 8px;
+      font-size:20px;
+    }
+
+    .admin-box p{
+      margin:0 0 14px;
+      color:var(--sub);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .admin-form{
+      display:grid;
+      gap:12px;
+    }
+
+    .admin-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .switches{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .switch{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#dfe7ff;
+      font-size:14px;
+    }
+
+    .switch input{
+      width:18px;
+      height:18px;
+      accent-color:#8b5cf6;
+    }
+
+    .admin-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .tips{
+      margin-top:14px;
+      background:rgba(122,162,255,.08);
+      border:1px solid rgba(122,162,255,.18);
+      border-radius:16px;
+      padding:12px;
+      color:#d6e1ff;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .empty{
+      text-align:center;
+      color:var(--sub);
+      padding:40px 20px;
+      border:1px dashed rgba(255,255,255,.12);
+      border-radius:18px;
+    }
+
+    .footer{
+      margin-top:24px;
+      text-align:center;
+      color:#98a3c7;
+      font-size:13px;
+    }
+
+    .divider{
+      height:1px;
+      background:var(--line);
+      margin:18px 0;
+    }
+
+    @media (max-width:1100px){
+      .layout{grid-template-columns:1fr}
+      .side{position:static}
+    }
+
+    @media (max-width:900px){
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .toolbar{grid-template-columns:1fr 1fr}
+      .recommend-box{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:640px){
+      .hero{padding:20px}
+      .title h1{font-size:26px}
+      .card-number,.nice-number{font-size:30px}
+      .toolbar,.admin-grid,.switches{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo">46</div>
+          <div class="title">
+            <h1>46靓号展示站</h1>
+            <p>支持 4位 / 6位 靓号展示、搜索筛选、价格隐藏、推荐号码与本地管理。<br>先上线展示，后续再升级真后台和数据库。</p>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn primary" id="togglePriceBtn">隐藏价格</button>
+          <button class="btn pink" id="contactBtn">联系我</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="label">当前总库存</div>
+          <div class="value" id="statTotal">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">4位号码</div>
+          <div class="value" id="stat4">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">6位号码</div>
+          <div class="value" id="stat6">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">推荐号码</div>
+          <div class="value" id="statHot">0</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <main>
+        <section class="panel">
+          <div class="panel-head">
+            <h2>筛选与查找</h2>
+          </div>
+          <div class="panel-body">
+            <div class="toolbar">
+              <div class="field">
+                <label>搜索号码</label>
+                <input id="searchInput" class="input" placeholder="输入号码，例如 9880 / 998880" />
+              </div>
+
+              <div class="field">
+                <label>位数</label>
+                <select id="digitFilter" class="select">
+                  <option value="all">全部</option>
+                  <option value="4">4位</option>
+                  <option value="6">6位</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>状态</label>
+                <select id="statusFilter" class="select">
+                  <option value="all">全部</option>
+                  <option value="sale">在售</option>
+                  <option value="rent">出租中</option>
+                  <option value="off">已下架</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>排序</label>
+                <select id="sortFilter" class="select">
+                  <option value="default">默认排序</option>
+                  <option value="priceAsc">价格从低到高</option>
+                  <option value="priceDesc">价格从高到低</option>
+                  <option value="numberAsc">号码从小到大</option>
+                  <option value="numberDesc">号码从大到小</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>推荐</label>
+                <select id="hotFilter" class="select">
+                  <option value="all">全部</option>
+                  <option value="hot">只看推荐</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="panel-head" style="padding:0 0 12px;">
+              <h2>推荐号码</h2>
+            </div>
+            <div id="recommendList" class="recommend-box"></div>
+
+            <div class="divider"></div>
+
+            <div class="panel-head" style="padding:0 0 12px;">
+              <h2>全部号码</h2>
+            </div>
+            <div id="numberList" class="grid"></div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="side">
+        <section class="panel">
+          <div class="admin-box">
+            <h3>本地管理面板</h3>
+            <p>这里是演示版后台。你在这里新增、编辑、删除后，会保存在当前浏览器本地，不用每次刷新都重来。</p>
+
+            <div class="admin-form">
+              <div class="field">
+                <label>号码</label>
+                <input id="formNumber" class="input" placeholder="例如 9880 / 998880" />
+              </div>
+
+              <div class="admin-grid">
+                <div class="field">
+                  <label>位数</label>
+                  <select id="formDigit" class="select">
+                    <option value="4">4位</option>
+                    <option value="6">6位</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label>价格</label>
+                  <input id="formPrice" class="input" type="number" placeholder="输入价格" />
+                </div>
+              </div>
+
+              <div class="admin-grid">
+                <div class="field">
+                  <label>状态</label>
+                  <select id="formStatus" class="select">
+                    <option value="sale">在售</option>
+                    <option value="rent">出租中</option>
+                    <option value="off">已下架</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label>等级/分类</label>
+                  <input id="formLevel" class="input" placeholder="例如 精品 / 豹子 / 顺口" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label>备注</label>
+                <textarea id="formRemark" class="textarea" placeholder="例如：尾号漂亮、适合展示、带重复、顺口好记"></textarea>
+              </div>
+
+              <div class="switches">
+                <label class="switch">
+                  <span>推荐号码</span>
+                  <input id="formHot" type="checkbox" />
+                </label>
+                <label class="switch">
+                  <span>显示在前台</span>
+                  <input id="formVisible" type="checkbox" checked />
+                </label>
+              </div>
+
+              <div class="admin-actions">
+                <button class="btn green" id="saveBtn">新增号码</button>
+                <button class="btn" id="resetBtn" type="button">清空表单</button>
+              </div>
+
+              <div class="tips">
+                小提示：点击卡片上的“编辑”按钮后，这里会自动带出数据。<br>
+                改完再点“保存修改”即可。
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <div class="footer">
+      46靓号展示站 · 静态演示版 · 适合先上线展示，后续可升级真后台
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "cool-number-site-data-v1";
+    const PRICE_TOGGLE_KEY = "cool-number-price-toggle-v1";
+
+    const defaultData = [
+      { id: 1, number: "9880", digit: 4, price: 1000, status: "sale", level: "精品", hot: true, visible: true, remark: "尾号顺口，适合展示" },
+      { id: 2, number: "6880", digit: 4, price: 600, status: "sale", level: "顺口", hot: false, visible: true, remark: "数字舒服，简洁耐看" },
+      { id: 3, number: "0299", digit: 4, price: 600, status: "sale", level: "个性", hot: false, visible: true, remark: "带双9，辨识度高" },
+      { id: 4, number: "1660", digit: 4, price: 600, status: "rent", level: "顺口", hot: false, visible: true, remark: "当前出租中，可咨询" },
+      { id: 5, number: "998880", digit: 6, price: 500, status: "sale", level: "豹子感", hot: true, visible: true, remark: "重复感强，记忆点明显" },
+      { id: 6, number: "988889", digit: 6, price: 500, status: "sale", level: "精品", hot: true, visible: true, remark: "尾部重复，适合门面号" },
+      { id: 7, number: "223300", digit: 6, price: 300, status: "sale", level: "双对", hot: false, visible: true, remark: "简洁有节奏感" },
+      { id: 8, number: "111100", digit: 6, price: 500, status: "off", level: "豹子感", hot: false, visible: true, remark: "当前已下架，暂不展示交易" },
+      { id: 9, number: "889990", digit: 6, price: 300, status: "sale", level: "精品", hot: false, visible: true, remark: "尾部规整，好记" }
+    ];
+
+    let numbers = loadData();
+    let showPrice = loadPriceToggle();
+    let editingId = null;
+
+    const searchInput = document.getElementById("searchInput");
+    const digitFilter = document.getElementById("digitFilter");
+    const statusFilter = document.getElementById("statusFilter");
+    const sortFilter = document.getElementById("sortFilter");
+    const hotFilter = document.getElementById("hotFilter");
+    const numberList = document.getElementById("numberList");
+    const recommendList = document.getElementById("recommendList");
+    const togglePriceBtn = document.getElementById("togglePriceBtn");
+    const contactBtn = document.getElementById("contactBtn");
+
+    const formNumber = document.getElementById("formNumber");
+    const formDigit = document.getElementById("formDigit");
+    const formPrice = document.getElementById("formPrice");
+    const formStatus = document.getElementById("formStatus");
+    const formLevel = document.getElementById("formLevel");
+    const formRemark = document.getElementById("formRemark");
+    const formHot = document.getElementById("formHot");
+    const formVisible = document.getElementById("formVisible");
+    const saveBtn = document.getElementById("saveBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function loadData() {
+      try {
+        const local = localStorage.getItem(STORAGE_KEY);
+        return local ? JSON.parse(local) : defaultData;
+      } catch {
+        return defaultData;
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(numbers));
+    }
+
+    function loadPriceToggle() {
+      const local = localStorage.getItem(PRICE_TOGGLE_KEY);
+      return local === null ? true : JSON.parse(local);
+    }
+
+    function savePriceToggle() {
+      localStorage.setItem(PRICE_TOGGLE_KEY, JSON.stringify(showPrice));
+    }
+
+    function getStatusText(status) {
+      if (status === "sale") return "在售";
+      if (status === "rent") return "出租中";
+      return "已下架";
+    }
+
+    function getStatusClass(status) {
+      if (status === "sale") return "sale";
+      if (status === "rent") return "rent";
+      return "off";
+    }
+
+    function renderStats() {
+      const visibleNumbers = numbers.filter(item => item.visible);
+      document.getElementById("statTotal").textContent = visibleNumbers.length;
+      document.getElementById("stat4").textContent = visibleNumbers.filter(item => item.digit === 4).length;
+      document.getElementById("stat6").textContent = visibleNumbers.filter(item => item.digit === 6).length;
+      document.getElementById("statHot").textContent = visibleNumbers.filter(item => item.hot).length;
+    }
+
+    function getFilteredData() {
+      let data = numbers.filter(item => item.visible);
+
+      const keyword = searchInput.value.trim();
+      const digit = digitFilter.value;
+      const status = statusFilter.value;
+      const sort = sortFilter.value;
+      const hot = hotFilter.value;
+
+      if (keyword) {
+        data = data.filter(item => item.number.includes(keyword) || (item.level || "").includes(keyword) || (item.remark || "").includes(keyword));
+      }
+
+      if (digit !== "all") {
+        data = data.filter(item => String(item.digit) === digit);
+      }
+
+      if (status !== "all") {
+        data = data.filter(item => item.status === status);
+      }
+
+      if (hot === "hot") {
+        data = data.filter(item => item.hot);
+      }
+
+      if (sort === "priceAsc") data.sort((a,b) => a.price - b.price);
+      if (sort === "priceDesc") data.sort((a,b) => b.price - a.price);
+      if (sort === "numberAsc") data.sort((a,b) => Number(a.number) - Number(b.number));
+      if (sort === "numberDesc") data.sort((a,b) => Number(b.number) - Number(a.number));
+
+      return data;
+    }
+
+    function renderRecommend() {
+      const hotData = numbers.filter(item => item.visible && item.hot).slice(0, 3);
+
+      if (!hotData.length) {
+        recommendList.innerHTML = '<div class="empty" style="grid-column:1/-1;">暂时没有推荐号码</div>';
+        return;
+      }
+
+      recommendList.innerHTML = hotData.map(item => `
+        <div class="highlight">
+          <span class="tag">⭐ 推荐号码</span>
+          <div class="nice-number">${item.number}</div>
+          <div class="meta">
+            <span>${item.digit}位</span>
+            <span>${item.level || "未分类"}</span>
+            <span>${getStatusText(item.status)}</span>
+          </div>
+          <div class="price ${showPrice ? "" : "hide"}">${showPrice ? "¥ " + item.price : "¥ ******"}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderList() {
+      const data = getFilteredData();
+
+      if (!data.length) {
+        numberList.innerHTML = `<div class="empty" style="grid-column:1/-1;">没有找到符合条件的号码</div>`;
+        return;
+      }
+
+      numberList.innerHTML = data.map(item => `
+        <div class="card">
+          <div class="card-top">
+            <span class="badge ${getStatusClass(item.status)}">${getStatusText(item.status)}</span>
+            ${item.hot ? `<span class="fav">★ 推荐</span>` : ``}
+          </div>
+
+          <div class="card-number">${item.number}</div>
+
+          <div class="info-row">
+            <span class="chip">${item.digit}位</span>
+            <span class="chip">${item.level || "未分类"}</span>
+            <span class="chip ${showPrice ? "" : "hide"}">${showPrice ? "¥ " + item.price : "¥ ******"}</span>
+          </div>
+
+          <div class="remark">${item.remark || "暂无备注"}</div>
+
+          <div class="card-actions">
+            <button class="btn small primary" onclick="copyNumber('${item.number}')">复制号码</button>
+            <button class="btn small" onclick="editItem(${item.id})">编辑</button>
+            <button class="btn small red" onclick="deleteItem(${item.id})">删除</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderAll() {
+      togglePriceBtn.textContent = showPrice ? "隐藏价格" : "显示价格";
+      renderStats();
+      renderRecommend();
+      renderList();
+    }
+
+    function resetForm() {
+      editingId = null;
+      formNumber.value = "";
+      formDigit.value = "4";
+      formPrice.value = "";
+      formStatus.value = "sale";
+      formLevel.value = "";
+      formRemark.value = "";
+      formHot.checked = false;
+      formVisible.checked = true;
+      saveBtn.textContent = "新增号码";
+    }
+
+    function validateForm() {
+      const number = formNumber.value.trim();
+      const digit = Number(formDigit.value);
+      const price = Number(formPrice.value);
+
+      if (!number) {
+        alert("请输入号码");
+        return false;
+      }
+
+      if (!/^\d+$/.test(number)) {
+        alert("号码只能输入数字");
+        return false;
+      }
+
+      if (number.length !== digit) {
+        alert(`你选择的是 ${digit} 位，但号码长度不对`);
+        return false;
+      }
+
+      if (!price || price < 0) {
+        alert("请输入正确价格");
+        return false;
+      }
+
+      return true;
+    }
+
+    function submitForm() {
+      if (!validateForm()) return;
+
+      const payload = {
+        number: formNumber.value.trim(),
+        digit: Number(formDigit.value),
+        price: Number(formPrice.value),
+        status: formStatus.value,
+        level: formLevel.value.trim(),
+        hot: formHot.checked,
+        visible: formVisible.checked,
+        remark: formRemark.value.trim()
+      };
+
+      if (editingId) {
+        numbers = numbers.map(item => item.id === editingId ? { ...item, ...payload } : item);
+      } else {
+        numbers.unshift({
+          id: Date.now(),
+          ...payload
+        });
+      }
+
+      saveData();
+      resetForm();
+      renderAll();
+    }
+
+    window.editItem = function(id) {
+      const item = numbers.find(n => n.id === id);
+      if (!item) return;
+
+      editingId = id;
+      formNumber.value = item.number;
+      formDigit.value = String(item.digit);
+      formPrice.value = item.price;
+      formStatus.value = item.status;
+      formLevel.value = item.level || "";
+      formRemark.value = item.remark || "";
+      formHot.checked = item.hot;
+      formVisible.checked = item.visible;
+      saveBtn.textContent = "保存修改";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    window.deleteItem = function(id) {
+      const item = numbers.find(n => n.id === id);
+      if (!item) return;
+      if (!confirm(`确定删除号码 ${item.number} 吗？`)) return;
+
+      numbers = numbers.filter(n => n.id !== id);
+      saveData();
+      if (editingId === id) resetForm();
+      renderAll();
+    }
+
+    window.copyNumber = async function(number) {
+      try {
+        await navigator.clipboard.writeText(number);
+        alert("号码已复制：" + number);
+      } catch {
+        alert("复制失败，请手动复制：" + number);
+      }
+    }
+
+    [searchInput, digitFilter, statusFilter, sortFilter, hotFilter].forEach(el => {
+      el.addEventListener("input", renderList);
+      el.addEventListener("change", renderList);
+    });
+
+    togglePriceBtn.addEventListener("click", () => {
+      showPrice = !showPrice;
+      savePriceToggle();
+      renderAll();
+    });
+
+    contactBtn.addEventListener("click", () => {
+      alert("把这里改成你的联系方式，例如：微信 / TG / QQ");
+    });
+
+    saveBtn.addEventListener("click", submitForm);
+    resetBtn.addEventListener("click", resetForm);
+
+    renderAll();
+  </script>
+</body>
+</html>
